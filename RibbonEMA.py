@@ -1,4 +1,4 @@
-# WILL TIDY UP SOON
+# WILL TIDY UP SOMETIME
 
 from types import BuiltinFunctionType
 import ccxt, config
