@@ -1,3 +1,5 @@
+# WILL TIDY UP SOON
+
 from types import BuiltinFunctionType
 import ccxt, config
 from numpy import short
