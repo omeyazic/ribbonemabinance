@@ -57,7 +57,7 @@ while True:
         current_positions = [position for position in positions if float(position['positionAmt']) != 0 and position['symbol'] == newSymbol]
         position_bilgi = pd.DataFrame(current_positions, columns=["symbol", "entryPrice", "unrealizedProfit", "isolatedWallet", "positionAmt", "positionSide"])
         
-        #Pozisyonda olup olmadığını kontrol etme
+        # Check if a position is open
         if not position_bilgi.empty and position_bilgi["positionAmt"][len(position_bilgi.index) - 1] != 0:
             pozisyondami = True
         else: 
@@ -65,11 +65,11 @@ while True:
             shortPozisyonda = False
             longPozisyonda = False
         
-        # Long pozisyonda mı?
+        # In long position?
         if pozisyondami and float(position_bilgi["positionAmt"][len(position_bilgi.index) - 1]) > 0:
             longPozisyonda = True
             shortPozisyonda = False
-        # Short pozisyonda mı?
+        # In short position?
         if pozisyondami and float(position_bilgi["positionAmt"][len(position_bilgi.index) - 1]) < 0:
             shortPozisyonda = True
             longPozisyonda = False
@@ -80,7 +80,7 @@ while True:
         df = pd.DataFrame(bars, columns=["timestamp", "open", "high", "low", "close", "volume"])
 
         # LOAD RSI & EMA20 & EMA55
-        rsi = talib.RSI(df["close"]) # kapanis degerlerinden rsi degerlerini hesapla
+        rsi = talib.RSI(df["close"]) # calculate RSIs from close values
         df['rsi14'] = rsi
         df['ema20'] = talib.EMA(rsi, timeperiod = ema20)
         df['ema55'] = talib.EMA(rsi, timeperiod = ema55)  
