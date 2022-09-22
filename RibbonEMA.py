@@ -1,4 +1,4 @@
-# WILL TIDY UP SOMETIME
+## # #  WILL TIDY UP SOMETIME # # #
 
 from types import BuiltinFunctionType
 import ccxt, config
@@ -9,16 +9,18 @@ from datetime import datetime
 from smtplib import SMTP
 import talib
 
-import pygame
-pygame.init()
-pygame.mixer.init()
-pygame.mixer.music.load("dumbelek.mp3")
+# soundlibrary for MacOS to play after the event
+# import pygame
+# pygame.init()
+# pygame.mixer.init()
+# pygame.mixer.music.load("dumbelek.mp3")
 
 # import pygame
 # pygame.init()
 # pygame.mixer.init()
 # #duration = 1000 #milliseconds
 # #freq = 440 #Hz
+
 
 symbolName = input("Sembol Adi Girin(BTC, ETH, LTC, ...")
 leverage = input("Kaldirac buyuklugu: ")
@@ -35,7 +37,7 @@ alinacak_miktar = 0
 ema20 = 20
 ema55 = 55
 
-#API CONNECT
+#API CONNECT - put your API credentials in a separate config.py file under same path
 exchange = ccxt.binance({
 "apiKey": config.apiKey,
 "secret": config.secretKey,
@@ -90,22 +92,22 @@ while True:
         # LONG ENTER
         def longEnter(alinacak_miktar):
             order = exchange.create_market_buy_order(symbol, alinacak_miktar)
-            pygame.mixer.music.play(0)
+        #   pygame.mixer.music.play(0)
             
         # LONG EXIT
         def longExit():
             order = exchange.create_market_sell_order(symbol, float(position_bilgi["positionAmt"][len(position_bilgi.index) - 1]), {"reduceOnly": True}) # SELL ORDER | SEMBOL | NE KADAR SATILACAGI | ACIK POZU KAPATMASI ICIN (YENI POZISYON ACILMAYACAK)
-            pygame.mixer.music.play(0)
+        #   pygame.mixer.music.play(0)
 
         # SHORT ENTER
         def shortEnter(alincak_miktar):
             order = exchange.create_market_sell_order(symbol, alincak_miktar)
-            pygame.mixer.music.play(0)
+        #   pygame.mixer.music.play(0)
             
         # SHORT EXIT
         def shortExit():
             order = exchange.create_market_buy_order(symbol, (float(position_bilgi["positionAmt"][len(position_bilgi.index) - 1]) * -1), {"reduceOnly": True})
-            pygame.mixer.music.play(0)
+        #   pygame.mixer.music.play(0)
 
         # CONDITION LONG ENTER \ SHORT EXIT 
         if (df['rsi14'][len(df.index)-3]  < df['ema55'][len(df.index)-3] and df['rsi14'][len(df.index)-2] > df['ema55'][len(df.index)-2] and longPozisyonda == False):
