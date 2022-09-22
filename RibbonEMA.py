@@ -148,12 +148,12 @@ while True:
             # mail.sendmail(config.mailAddress, config.sendTo, content.encode("utf-8"))
 
         if pozisyondami == False:
-            print("POZİSYON ARANIYOR...")
+            print("SEEKING FOR A POSITION TO ENTER...")
 
         if shortPozisyonda:
-            print("SHORT POZİSYONDA BEKLİYOR")
+            print("SHORT POSITON IN PROGRESS")
         if longPozisyonda:
-            print("LONG POZİSYONDA BEKLİYOR")
+            print("LONG POSITON IN PROGRESS")
         
     except ccxt.BaseError as Error:
         print ("[ERROR]", Error )
